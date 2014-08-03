@@ -18,29 +18,29 @@ public class SystemContext {
 	 */
 	private static ThreadLocal<String> order = new ThreadLocal<String>();
 	
-	public static ThreadLocal<Integer> getPageSize() {
-		return pageSize;
+	public static Integer getPageSize() {
+		return pageSize.get();
 	}
-	public static void setPageSize(ThreadLocal<Integer> pageSize) {
-		SystemContext.pageSize = pageSize;
+	public static void setPageSize(Integer _pageSize) {
+		pageSize.set(_pageSize);
 	}
-	public static ThreadLocal<Integer> getPageOffset() {
-		return pageOffset;
+	public static Integer getPageOffset() {
+		return pageOffset.get();
 	}
-	public static void setPageOffset(ThreadLocal<Integer> pageOffset) {
-		SystemContext.pageOffset = pageOffset;
+	public static void setPageOffset(Integer _pageOffset) {
+		pageOffset.set(_pageOffset);
 	}
-	public static ThreadLocal<String> getSort() {
-		return sort;
+	public static String getSort() {
+		return sort.get();
 	}
-	public static void setSort(ThreadLocal<String> sort) {
-		SystemContext.sort = sort;
+	public static void setSort(String _sort) {
+		sort.set(_sort);
 	}
-	public static ThreadLocal<String> getOrder() {
-		return order;
+	public static String getOrder() {
+		return order.get();
 	}
-	public static void setOrder(ThreadLocal<String> order) {
-		SystemContext.order = order;
+	public static void setOrder(String _order) {
+		order.set(_order);
 	}
 	
 	public static void removePageSize() {
