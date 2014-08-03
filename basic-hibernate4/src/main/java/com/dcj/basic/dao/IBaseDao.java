@@ -31,4 +31,5 @@ public interface IBaseDao<T> {
 	 * @return 查询一组布分页的列表对象
 	 */
 	public List<T> list(String hql);
+	public List<T> list(String hql,Object arg);
 }

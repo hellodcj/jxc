@@ -1,6 +1,7 @@
 package com.dcj.basic.dao;
 
 import java.lang.reflect.ParameterizedType;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -52,6 +53,18 @@ public class BaseDao<T> implements IBaseDao<T> {
 	@Override
 	public T load(int id) {
 		return (T)getSession().load(getClz(), id);
+	}
+
+	@Override
+	public List<T> list(String hql) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<T> list(String hql, Object arg) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
