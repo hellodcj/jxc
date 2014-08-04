@@ -40,6 +40,20 @@ public interface IBaseDao<T> {
 	public List<T> list(String hql, Object[] args, Map<String, Object> alias);
 	
 	/**
+	 * 根据sql语句来查询list
+	 * @param sql
+	 * @param args
+	 * @param alias
+	 * @param clz
+	 * @param hasEntity
+	 * @return
+	 */
+	public <N extends Object>List<N> listBySql(String sql, Object[] args,Map<String, Object> alias, Class<?> clz, boolean hasEntity);
+	public <N extends Object>List<N> listByAliasSql(String sql, Map<String, Object> alias,Class<?> clz, boolean hasEntity);
+	public <N extends Object>List<N> listBySql(String sql, Object[] args, Class<?> clz,boolean hasEntity);
+	public <N extends Object>List<N> listBySql(String sql, Object arg, Class<?> clz,boolean hasEntity) ;
+	public <N extends Object>List<N> listBySql(String sql, Class<?> clz, boolean hasEntity) ;
+	/**
 	 * 分页对象
 	 * @param hql
 	 * @return Pager<T>
@@ -49,6 +63,20 @@ public interface IBaseDao<T> {
 	public Pager<T> find(String hql,Object[] args);
 	public Pager<T> findByAlias(String hql,Map<String, Object> alias);
 	public Pager<T> find(String hql, Object[] args, Map<String, Object> alias);
+	
+	/**
+	 * 根据sql来得到分页对象
+	 * @param sql
+	 * @param args
+	 * @param clz
+	 * @param hasEntity
+	 * @return
+	 */
+	public <N extends Object>Pager<N> findBySql(String sql, Object[] args, Class<?> clz,boolean hasEntity);
+	public <N extends Object>Pager<N> findBySql(String sql, Object arg, Class<?> clz,boolean hasEntity);
+	public <N extends Object>Pager<N> findBySql(String sql, Class<?> clz, boolean hasEntity);
+	public <N extends Object>Pager<N> findBySql(String sql, Object[] args,Map<String, Object> alias, Class<?> clz, boolean hasEntity);
+	public <N extends Object>Pager<N> findByAliasSql(String sql, Map<String, Object> alias,Class<?> clz, boolean hasEntity);
 	/**
 	 * 查询单个对象
 	 * @param hql
