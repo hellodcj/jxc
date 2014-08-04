@@ -93,56 +93,91 @@ public class BaseDao<T> implements IBaseDao<T> {
 
 	@Override
 	public Pager<T> find(String hql) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.find(hql, null);
 	}
 
 	@Override
 	public Pager<T> find(String hql, Object arg) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.find(hql, new Object[]{arg});
 	}
 
 	@Override
 	public Pager<T> find(String hql, Object[] args) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.find(hql, args, null);
+	}
+	
+	@Override
+	public Pager<T> findByAlias(String hql, Map<String, Object> alias) {
+		return this.find(hql, null, alias);
+	}
+
+	@Override
+	public Pager<T> find(String hql, Object[] args, Map<String, Object> alias) {
+		hql = initSort(hql);
+		String cq = getCountHql(hql,true);
+		Query cquery = getSession().createQuery(cq);
+		Query query = getSession().createQuery(hql);
+		//设置别名参数
+		setAliasParameter(query, alias);
+		setAliasParameter(cquery, alias);
+		//设置参数
+		setParameter(query, args);
+		setParameter(cquery, args);
+		//实例化一个分页对象，将从context中获取的分页信息，传入这个对象中
+		Pager<T> pages = new Pager<T>();
+		setPagers(query,pages);
+		List<T> datas = query.list();
+		pages.setDatas(datas);
+		long total = (Long)cquery.uniqueResult();
+		pages.setTotal(total);
+		return pages;
 	}
 
 	@Override
 	public Object queryObject(String hql) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.queryObject(hql,null);
 	}
 
 	@Override
 	public Object queryObject(String hql, Object arg) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.queryObject(hql, new Object[]{arg});
 	}
 
 	@Override
 	public Object queryObject(String hql, Object[] args) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.queryObject(hql, args,null);
+	}
+	
+	@Override
+	public Object queryObject(String hql, Object[] args,
+			Map<String, Object> alias) {
+		Query query = getSession().createQuery(hql);
+		setAliasParameter(query, alias);
+		setParameter(query, args);
+		return query.uniqueResult();
+	}
+
+	@Override
+	public Object queryObjectByAlias(String hql, Map<String, Object> alias) {
+		return this.queryObject(hql,null,alias);
 	}
 
 	@Override
 	public void updateByHql(String hql) {
-		// TODO Auto-generated method stub
+		this.updateByHql(hql, null);
 		
 	}
 
 	@Override
 	public void updateByHql(String hql, Object arg) {
-		// TODO Auto-generated method stub
-		
+		this.updateByHql(hql, new Object[]{arg});
 	}
 
 	@Override
 	public void updateByHql(String hql, Object[] args) {
-		// TODO Auto-generated method stub
-		
+		Query query = getSession().createQuery(hql);
+		setParameter(query, args);
+		query.executeUpdate();
 	}
 
 	/**
@@ -195,15 +230,32 @@ public class BaseDao<T> implements IBaseDao<T> {
 		}
 	}
 
-	@Override
-	public Pager<T> findByAlias(String hql, Map<String, Object> alias) {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * 拼接count的hql语句
+	 * @param hql
+	 * @param isHql
+	 * @return
+	 */
+	private String getCountHql(String hql,boolean isHql) {
+		String e = hql.substring(hql.indexOf("from"));
+		String c = "select count(*) "+e;
+		if(isHql)
+			c.replaceAll("fetch", "");
+		return c;
 	}
 
-	@Override
-	public Pager<T> find(String hql, Object[] args, Map<String, Object> alias) {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * 从context中获取分页信息，并初始化query的分页
+	 * @param query
+	 * @param pages
+	 */
+	private void setPagers(Query query,Pager pages) {
+		Integer pageSize = SystemContext.getPageSize();
+		Integer pageOffset = SystemContext.getPageOffset();
+		if(pageOffset==null||pageOffset<0) pageOffset = 0;
+		if(pageSize==null||pageSize<0) pageSize = 15;
+		pages.setOffset(pageOffset);
+		pages.setSize(pageSize);
+		query.setFirstResult(pageOffset).setMaxResults(pageSize);
 	}
 }

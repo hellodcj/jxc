@@ -57,6 +57,8 @@ public interface IBaseDao<T> {
 	public Object queryObject(String hql) ;
 	public Object queryObject(String hql,Object arg) ;
 	public Object queryObject(String hql,Object[] args) ;
+	public Object queryObject(String hql, Object[] args,Map<String, Object> alias);
+	public Object queryObjectByAlias(String hql, Map<String, Object> alias);
 	
 	/**
 	 * 根据hql来更新数据
