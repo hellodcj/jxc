@@ -11,7 +11,10 @@
 	
 	<mvc:annotation-driven/>
 	<mvc:resources location="/resources/" mapping="/resources/**"/>
-	<context:component-scan base-package="com.dcj.jxc.controller"/>
+	
+	<mvc:view-controller path="/admin/jqgrid" view-name="/admin/jqgrid"/>
+	
+	<context:component-scan base-package="com.dcj.jxc.controller,com.dcj.jxc.service,com.dcj.basic.dao"/>
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/"/>
 		<property name="suffix" value=".jsp"/>

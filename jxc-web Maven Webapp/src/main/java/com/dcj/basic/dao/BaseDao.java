@@ -14,10 +14,12 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.transform.Transformers;
+import org.springframework.stereotype.Repository;
 
 import com.dcj.basic.model.SystemContext;
 import com.dcj.basic.model.Pager;
 
+@Repository(value="baseDao")
 public class BaseDao<T> implements IBaseDao<T> {
 	
 	private SessionFactory sessionFactory;
