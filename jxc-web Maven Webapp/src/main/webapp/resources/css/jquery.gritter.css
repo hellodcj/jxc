@@ -62,11 +62,12 @@
 	display:none;
 	position:absolute;
 	top:5px;
-	left:3px;
-	background:url(../images/gritter.png) no-repeat left top;
+	right:3px;
+	background:url(../images/gritter.png) no-repeat;
 	cursor:pointer;
 	width:30px;
 	height:30px;
+	text-indent:-9999em;
 }
 .gritter-title {
 	font-size:14px;
@@ -98,4 +99,12 @@
 }
 .gritter-light .gritter-title {
     text-shadow: none;
+}
+.gritter-myposition {
+	position:fixed;
+	left:43%;
+	right:43%;
+	/* top:33%; */
+	width:302px;
+	z-index:9999;
 }
