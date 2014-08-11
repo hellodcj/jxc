@@ -36,7 +36,7 @@
 						<label class="col-sm-3 control-label no-padding-right" > 姓名 </label>
 				
 						<div class="col-sm-4">
-							<input type="text" name="nickname" id="nickname" placeholder="姓名" class="col-xs-10 col-sm-12" value="${user.nickname} }"/>
+							<input type="text" name="nickname" id="nickname" placeholder="姓名" class="col-xs-10 col-sm-12" value="${user.nickname} "/>
 						</div>
 					</div>
 				
@@ -46,7 +46,7 @@
 						<label class="col-sm-3 control-label no-padding-right" > 邮箱 </label>
 				
 						<div class="col-sm-4">
-							<input type="text" name="email" id="email" placeholder="邮箱必填" class="col-xs-10 col-sm-12" />
+							<input type="text" name="email" id="email" placeholder="邮箱必填" class="col-xs-10 col-sm-12" value="${user.email}"/>
 						</div>
 					</div>
 				
@@ -79,7 +79,7 @@
 						<label class="col-sm-3 control-label no-padding-right" > 电话号码 </label>
 				
 						<div class="col-sm-4">
-							<input type="text" id="phone" name="phone" placeholder="电话号码 必填" class="col-xs-10 col-sm-12" />
+							<input type="text" id="phone" name="phone" placeholder="电话号码 必填" class="col-xs-10 col-sm-12" value="${user.phone }"/>
 						</div>
 					</div>
 					
@@ -219,7 +219,7 @@ $('#addUser').validate(
 		}
 		
 		var param = $("#addUser").serialize(); // 获取表单数据
-		var url = "/system/user_saveOrupdate"; // 入库并跳转到用户列表
+		var url = "/system/user_saveOrUpdate"; // 入库并跳转到用户列表
 		console.log(param);
 		trans2(url, '系统管理-用户管理', param);
 	});

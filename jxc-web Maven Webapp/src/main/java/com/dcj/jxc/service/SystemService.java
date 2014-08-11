@@ -4,17 +4,17 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.dcj.basic.dao.IBaseDao;
-import com.dcj.basic.model.PageResult;
 import com.dcj.basic.model.Pager;
+import com.dcj.jxc.dao.IUserDao;
+import com.dcj.jxc.model.Material;
 import com.dcj.jxc.model.User;
 
 @Service
 public class SystemService implements ISystemService {
-	private IBaseDao<User> userDao;
+	private IUserDao userDao;
 	
 	@Inject
-	public void setUserDao(IBaseDao<User> userDao) {
+	public void setUserDao(IUserDao userDao) {
 		this.userDao = userDao;
 	}
 
@@ -52,6 +52,34 @@ public class SystemService implements ISystemService {
 	@Override
 	public User loadUser(int userId) {
 		return userDao.load(userId);
+	}
+
+
+	@Override
+	public Pager<Material> queryMaterialList(int pageSize, int pageNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Material loadMaterial(int materialId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void updateMaterial(Material material) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void saveMaterial(Material material) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

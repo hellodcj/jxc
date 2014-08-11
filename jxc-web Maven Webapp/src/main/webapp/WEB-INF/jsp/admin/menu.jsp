@@ -62,18 +62,18 @@
 					</a>
 					</li>
 					<li id="menu-system-param"
-						onclick="trans('/wh_socket/edit_config','系统管理-远端服务器参数','nav000',this);">
-						<a href="javascript:void(0);"> <i class="icon-leaf"></i>平台服务器配置
+						onclick="trans('/wh_socket/edit_config','系统管理-物料管理','nav000',this);">
+						<a href="javascript:void(0);"> <i class="icon-leaf"></i>物料管理
 					</a>
 					</li>
 					<li id="menu-sensor-type"
-						onclick="trans('/param/st','系统管理-传感器类别','nav000',this);"><a
-						href="javascript:void(0);"> <i class="icon-leaf"></i> 设备类别配置
+						onclick="trans('/system/vendorList','系统管理-供应商管理','nav000',this);"><a
+						href="javascript:void(0);"> <i class="icon-leaf"></i> 供应商管理
 					</a></li>
 					<li id="menu-system-param"
-						onclick="trans('/maps/maps_conf','系统管理-资源地图配置','nav000',this);">
+						onclick="trans('/system/customList','系统管理-客户管理','nav000',this);">
 						<a href="javascript:void(0);"> <i class="icon-leaf"></i>
-							模拟地图配置
+							客户管理
 					</a>
 					</li>
 					<li id="menu-user-mana"
@@ -83,159 +83,76 @@
 				</ul></li>
 			<li id="nav01"><a href="javascript:void(0);"
 				class="dropdown-toggle"> <i class="icon-cogs"></i> <span
-					class="menu-text"> 设备管理 </span> <b class="arrow icon-angle-down"></b>
+					class="menu-text"> 采购管理 </span> <b class="arrow icon-angle-down"></b>
 			</a>
 				<ul class="submenu">
 					<li id="menu-station-config"
-						onclick="trans('/param/sub','参数设置-分站配置','nav01',this);"><a
-						href="javascript:void(0);"> <i class="icon-leaf"></i> 分站管理
+						onclick="trans('/param/sub','采购管理-采购进货','nav01',this);"><a
+						href="javascript:void(0);"> <i class="icon-leaf"></i> 采购进货
 					</a></li>
 					<li id="menu-sensor-sim"
-						onclick="trans('/param/sen/0','系统设置-模拟量','nav01',this);"><a
-						href="javascript:void(0);"> <i class="icon-leaf"></i> 传感器管理
-					</a></li>
-					<li
-						onclick="trans('/basic/refreshcameras','基本信息－摄像头管理','nav01',this);">
-						<a href="javascript:void(0)"> <i
-							class="icon-double-angle-right"></i> 摄像机管理
-					</a>
-					</li>
-					<li id="menu-control-logic"
-						onclick="trans('/rule/rule_list','控制-控制逻辑','nav01',this);"><a
-						href="javascript:void(0);"> <i class="icon-leaf"></i> 控制逻辑管理
+						onclick="trans('/param/sen/0','采购管理-采购管理','nav01',this);"><a
+						href="javascript:void(0);"> <i class="icon-leaf"></i> 采购退货
 					</a></li>
 				</ul></li>
 
 			<li id="nav02"><a href="javascript:void(0);"
 				class="dropdown-toggle"> <i class="icon-barcode"></i> <span
-					class="menu-text"> 模拟图显示 </span> <b class="arrow icon-angle-down"></b>
+					class="menu-text"> 销售管理 </span> <b class="arrow icon-angle-down"></b>
 			</a>
 				<ul class="submenu">
 					<li id="menu-map-item"
-						onclick="trans('/maps/show_map_notedit','模拟图显示-通风系统图','nav02',this);">
-						<a href="javascript:void(0);"> <i class="icon-leaf"></i> 实时分布图
+						onclick="trans('/maps/show_map_notedit','销售管理-销售出货','nav02',this);">
+						<a href="javascript:void(0);"> <i class="icon-leaf"></i> 销售出货
 					</a>
 					</li>
-					<!-- <li onclick="trans('/monitor/gas_state','模拟图显示-瓦斯抽放图','nav07',this);"><a href="javascript:void(0);"> <i class="icon-leaf"></i> 瓦斯抽放图
-				</a></li> -->
 					<li id="menu-check-state"
-						onclick="trans('/monitor/state','模拟图显示-系统自检图','nav02',this);">
-						<a href="javascript:void(0);"> <i class="icon-leaf"></i> 系统自检图
+						onclick="trans('/monitor/state','销售管理-销售退货','nav02',this);">
+						<a href="javascript:void(0);"> <i class="icon-leaf"></i> 销售退货
 					</a>
 					</li>
 
 				</ul></li>
 
-			<li id="nav03"><a href="javascript:void(0);"
-				class="dropdown-toggle"> <i class="icon-list"></i> <span
-					class="menu-text"> 列表显示 </span> <b class="arrow icon-angle-down"></b>
+			<li id="nav06"><a href="javascript:void(0);"
+				class="dropdown-toggle" onclick="m_video.showVideo();"> <i
+					class=" icon-facetime-video"></i> <span class="menu-text">
+						库存管理 </span> <b class="arrow icon-angle-down"></b>
 			</a>
 				<ul class="submenu">
-					<li id="menu-real-list"
-						onclick="trans('/list/real/list','列表显示-实时列表','nav03',this);">
-						<a href="javascript:void(0);"> <i class="icon-leaf"></i> 全局列表
-					</a>
-					</li>
-					<li id="menu-list-alarm"
-						onclick="trans('/list/real/alarmlist','列表显示-报警','nav03',this);">
-						<a href="javascript:void(0);"> <i class="icon-leaf"></i> 报警列表
-					</a>
-					</li>
-					<li id="menu-list-fault"
-						onclick="trans('/list/fault','列表显示-设备故障','nav03',this);"><a
-						href="javascript:void(0);"> <i class="icon-leaf"></i> 故障列表
-					</a></li>
-					<li id="menu-real-list"
-						onclick="trans('/list/self_define_list','列表显示-自定义列表','nav03',this);">
-						<a href="javascript:void(0);"> <i class="icon-leaf"></i> 自定义列表
-					</a>
-					</li>
 				</ul></li>
 
-			<li id="nav04"><a href="javascript:void(0);"
-				class="dropdown-toggle"> <i class="icon-dashboard"></i> <span
-					class="menu-text"> 图形显示 </span> <b class="arrow icon-angle-down"></b>
-			</a>
-				<ul class="submenu">
-					<li id="menu-chart-alarm"
-						onclick="trans('/line/alarm/0','曲线显示- 实时曲线','nav04',this);">
-						<a href="javascript:void(0);"> <i class="icon-leaf"></i> 实时曲线
-					</a>
-					</li>
-					<li id="menu-chart-alarm"
-						onclick="trans('/line/alarm/1','曲线显示-报警','nav04',this);"><a
-						href="javascript:void(0);"> <i class="icon-leaf"></i> 报警曲线
-					</a></li>
-					<li id="menu-chart-state"
-						onclick="trans('/graph/stategraph','状态图与柱状图显示-状态图','nav04',this);"><a
-						href="javascript:void(0);"> <i class="icon-leaf"></i> 状态图
-					</a></li>
-					<li id="menu-chart-column"
-						onclick="trans('/graph/column','状态图与柱状图显示-柱状图','nav04',this);"><a
-						href="javascript:void(0);"> <i class="icon-leaf"></i> 柱状图
-					</a></li>
-				</ul></li>
+
 			<li id="nav05"><a href="javascript:void(0);"
 				class="dropdown-toggle"> <i class="icon-search"></i> <span
 					class="menu-text"> 统计查询 </span> <b class="arrow icon-angle-down"></b>
 			</a>
 				<ul class="submenu">
 					<li id="menu-query-alarm"
-						onclick="trans('/query/alarm','查询','nav05',this);"><a
-						href="javascript:void(0);"> <i class="icon-leaf"></i> 统计值记录
+						onclick="trans('/query/alarm','销售趋势','nav05',this);"><a
+						href="javascript:void(0);"> <i class="icon-leaf"></i> 销售趋势
 					</a></li>
 					<li id="menu-chart-alarm"
-						onclick="trans('/line/alarm/4','曲线显示-报警','nav05',this);"><a
-						href="javascript:void(0);"> <i class="icon-leaf"></i> 历史曲线
+						onclick="trans('/line/alarm/4','销售趋势','nav05',this);"><a
+						href="javascript:void(0);"> <i class="icon-leaf"></i> 退货统计
 					</a></li>
-					<li id="menu-query-count"
-						onclick="trans('/query/count','查询-模拟量统计值记录报表','nav05',this);">
-						<a href="javascript:void(0);"> <i class="icon-leaf"></i>
-							历史数据列表
-					</a>
-					</li>
-					<li id="menu-query-alarm"
-						onclick="trans('/query/count2','查询-报警','nav05',this);"><a
-						href="javascript:void(0);"> <i class="icon-leaf"></i> 报警信息列表
-					</a></li>
-					<li id="menu-query-fault"
-						onclick="trans('/query/fault','查询-设备故障','nav05',this);"><a
-						href="javascript:void(0);"> <i class="icon-leaf"></i> 设备故障列表
-					</a></li>
-					<li id="menu-user-log"
-						onclick="trans('/system/userlog','系统管理－用户日志','nav05',this);">
-						<a href="javascript:void(0)"> <i class="icon-leaf"></i> 用户日志
-					</a>
-					</li>
 				</ul></li>
-			<li id="nav06"><a href="javascript:void(0);"
-				class="dropdown-toggle" onclick="m_video.showVideo();"> <i
-					class=" icon-facetime-video"></i> <span class="menu-text">
-						视频监控 </span> <b class="arrow icon-angle-down"></b>
-			</a>
-				<ul class="submenu">
-				</ul></li>
+			
 			<li id="nav07"><a href="javascript:void(0);"
 				class="dropdown-toggle"> <i class="icon-table"></i> <span
 					class="menu-text"> 报表打印 </span> <b class="arrow icon-angle-down"></b>
 			</a>
 				<ul class="submenu">
 					<li id="menu-report-alarm"
-						onclick="trans('/report/analog','报表-模拟量报警日(班)报表','nav07',this);">
+						onclick="trans('/report/analog','报表-销售日报表','nav07',this);">
 						<a href="javascript:void(0);"> <i class="icon-leaf"></i>
-							模拟量报警日(班)报表
+							销售日报表
 					</a>
 					</li>
 					<li id="menu-report-swi"
-						onclick="trans('/report/switch','报表-开关量状态变动日(班)报表','nav07',this);">
+						onclick="trans('/report/switch','报表-销售月报表','nav07',this);">
 						<a href="javascript:void(0);"> <i class="icon-leaf"></i>
-							开关量状态变动日(班)报表
-					</a>
-					</li>
-					<li id="menu-report-fault"
-						onclick="trans('/report/faultlog','报表-设备故障日(班)报表','nav07',this);">
-						<a href="javascript:void(0);"> <i class="icon-leaf"></i>
-							设备故障日(班)报表
+							销售月报表
 					</a>
 					</li>
 				</ul></li>

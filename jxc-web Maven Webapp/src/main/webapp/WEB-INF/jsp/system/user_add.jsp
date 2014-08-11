@@ -217,7 +217,7 @@ $('#addUser').validate(
 		}
 		
 		var param = $("#addUser").serialize(); // 获取表单数据
-		var url = "/system/user_saveOrupdate"; // 入库并跳转到用户列表
+		var url = "/system/user_saveOrUpdate"; // 入库并跳转到用户列表
 		console.log(param);
 		trans2(url, '系统管理-用户管理', param);
 	});
