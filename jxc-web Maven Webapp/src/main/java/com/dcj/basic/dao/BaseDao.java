@@ -60,6 +60,7 @@ public class BaseDao<T> implements IBaseDao<T> {
 	@Override
 	public void update(T t) {
 		getSession().update(t);
+		getSession().flush();
 	}
 
 	@Override

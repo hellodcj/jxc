@@ -62,7 +62,7 @@
 					</a>
 					</li>
 					<li id="menu-system-param"
-						onclick="trans('/wh_socket/edit_config','系统管理-物料管理','nav000',this);">
+						onclick="trans('/system/material_list','系统管理-物料管理','nav000',this);">
 						<a href="javascript:void(0);"> <i class="icon-leaf"></i>物料管理
 					</a>
 					</li>

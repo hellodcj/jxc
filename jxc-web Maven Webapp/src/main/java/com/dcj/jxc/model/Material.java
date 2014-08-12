@@ -9,25 +9,25 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "t_material")
 public class Material {
-	private Integer id;
-	private Integer storageNum;
+	private int id;
+	private int storageNum;
 	private String category;
 	private String name;
 	private String unit;
 	
 	@Id
 	@GeneratedValue
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
-	public Integer getStorageNum() {
-		return storageNum;
-	}
-	public void setStorageNum(Integer storageNum) {
+	public void setStorageNum(int storageNum) {
 		this.storageNum = storageNum;
+	}
+	public int getStorageNum() {
+		return storageNum;
 	}
 	public String getName() {
 		return name;

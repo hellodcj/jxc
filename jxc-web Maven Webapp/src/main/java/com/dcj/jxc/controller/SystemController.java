@@ -1,6 +1,8 @@
 package com.dcj.jxc.controller;
 
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
@@ -73,7 +75,7 @@ public class SystemController {
 	 * @return
 	 */
 	@RequestMapping(value = "/user_saveOrUpdate")
-	public String userSaveOrUpdate(HttpServletRequest request, ModelMap model, User user) {
+	public String userSaveOrUpdate(User user) {
 		Integer id = user.getId();
 		if (id>0) {
 			sysService.updateUser(user);
@@ -103,7 +105,7 @@ public class SystemController {
 	 * 物料列表
 	 */
 	@RequestMapping(value="/material_list")
-	public String materialList(Model model,@RequestParam(value="pageSize",defaultValue="15") int pageSize,@RequestParam(value="pageNo",defaultValue="1") int pageNo){
+	public String materialList(ModelMap model,@RequestParam(value="pageSize",defaultValue="15") int pageSize,@RequestParam(value="pageNo",defaultValue="1") int pageNo){
 		Pager<Material> pr = sysService.queryMaterialList(pageSize,pageNo);
 		model.addAttribute("pr", pr);
 		return "/system/material_list";
@@ -112,9 +114,11 @@ public class SystemController {
 	/**
 	 * 添加物料的跳转
 	 */
-	@RequestMapping(value="/material_add")
-	public String materialAdd(){
-		return "/system/material_add";
+	@RequestMapping(value="/material_create")
+	public String materialAdd(ModelMap model){
+		List<String> categoryList = sysService.queryExistMaterialCategory();
+		model.put("categoryList", categoryList);
+		return "/system/material_create";
 	}
 	
 	/**
@@ -133,9 +137,10 @@ public class SystemController {
 	/**
 	 * 添加或者更新物料信息
 	 */
-	@RequestMapping(value="/saveOrUpdateMaterial")
+	@RequestMapping(value="/material_saveOrUpdate")
 	public String saveOrUpdateMaterial(Material material){
-		if(material.getId()>0){
+		Integer materialId = material.getId();
+		if(materialId>0){
 			sysService.updateMaterial(material);
 		}else{
 			sysService.saveMaterial(material);

@@ -1,5 +1,7 @@
 package com.dcj.jxc.service;
 
+import java.util.List;
+
 import com.dcj.basic.model.Pager;
 import com.dcj.jxc.model.Material;
 import com.dcj.jxc.model.User;
@@ -23,5 +25,7 @@ public interface ISystemService {
 	void updateMaterial(Material material);
 
 	void saveMaterial(Material material);
+
+	List<String> queryExistMaterialCategory();
 
 }
