@@ -4,20 +4,8 @@ import java.util.List;
 
 import com.dcj.basic.model.Pager;
 import com.dcj.jxc.model.Material;
-import com.dcj.jxc.model.User;
 
-public interface ISystemService {
-
-	Pager<User> queryUserList(int pageSize, int pageNo);
-
-	boolean checkUserNameRepeat(String username);
-
-	void updateUser(User user);
-
-	void addUser(User user);
-
-	User loadUser(int userId);
-
+public interface IMaterialService {
 	Pager<Material> queryMaterialList(int pageSize, int pageNo);
 
 	Material loadMaterial(int materialId);
@@ -28,4 +16,5 @@ public interface ISystemService {
 
 	List<String> queryExistMaterialCategory();
 
+	List<Material> listMaterial();
 }

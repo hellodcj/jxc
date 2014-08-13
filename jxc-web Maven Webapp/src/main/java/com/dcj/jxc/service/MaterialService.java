@@ -11,61 +11,16 @@ import com.dcj.basic.model.Pager;
 import com.dcj.jxc.dao.IMaterialDao;
 import com.dcj.jxc.dao.IUserDao;
 import com.dcj.jxc.model.Material;
-import com.dcj.jxc.model.User;
 
-@Service
-public class SystemService implements ISystemService {
-	private IUserDao userDao;
+@Service("materialService")
+public class MaterialService implements IMaterialService {
 	private IMaterialDao materialDao;
-	
-	@Inject
-	public void setUserDao(IUserDao userDao) {
-		this.userDao = userDao;
-	}
 	
 	@Inject
 	public void setMaterialDao(IMaterialDao materialDao) {
 		this.materialDao = materialDao;
 	}
-
-
-
-	@Override
-	public Pager<User> queryUserList(int pageSize, int pageNo) {
-		String hql = "from User ";
-		return userDao.find(hql);
-	}
-
-
-	/**
-	 * @return 表中已有返回true；表中没有返回false
-	 */
-	@Override
-	public boolean checkUserNameRepeat(String username) {
-		User u = (User) userDao.queryObject("from User u where u.username=?", username);
-		if(u!=null) return true;
-		return false;
-	}
-
-
-	@Override
-	public void updateUser(User user) {
-		userDao.update(user);
-	}
-
-
-	@Override
-	public void addUser(User user) {
-		userDao.add(user);
-	}
-
-
-	@Override
-	public User loadUser(int userId) {
-		return userDao.load(userId);
-	}
-
-
+	
 	@Override
 	public Pager<Material> queryMaterialList(int pageSize, int pageNo) {
 		String hql = "from Material";
@@ -103,4 +58,9 @@ public class SystemService implements ISystemService {
 		return sl;
 	}
 
+	@Override
+	public List<Material> listMaterial() {
+		List<Material> lm = materialDao.list("from Material");
+		return lm;
+	}
 }

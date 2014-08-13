@@ -87,12 +87,12 @@
 			</a>
 				<ul class="submenu">
 					<li id="menu-station-config"
-						onclick="trans('/param/sub','采购管理-采购进货','nav01',this);"><a
+						onclick="trans('/purchase/add','采购管理-采购进货','nav01',this);"><a
 						href="javascript:void(0);"> <i class="icon-leaf"></i> 采购进货
 					</a></li>
 					<li id="menu-sensor-sim"
-						onclick="trans('/param/sen/0','采购管理-采购管理','nav01',this);"><a
-						href="javascript:void(0);"> <i class="icon-leaf"></i> 采购退货
+						onclick="trans('/param/sen/0','采购管理-采购历史','nav01',this);"><a
+						href="javascript:void(0);"> <i class="icon-leaf"></i> 采购历史
 					</a></li>
 				</ul></li>
 
@@ -107,8 +107,8 @@
 					</a>
 					</li>
 					<li id="menu-check-state"
-						onclick="trans('/monitor/state','销售管理-销售退货','nav02',this);">
-						<a href="javascript:void(0);"> <i class="icon-leaf"></i> 销售退货
+						onclick="trans('/monitor/state','销售管理-销售历史','nav02',this);">
+						<a href="javascript:void(0);"> <i class="icon-leaf"></i> 销售历史
 					</a>
 					</li>
 
@@ -130,11 +130,11 @@
 				<ul class="submenu">
 					<li id="menu-query-alarm"
 						onclick="trans('/query/alarm','销售趋势','nav05',this);"><a
-						href="javascript:void(0);"> <i class="icon-leaf"></i> 销售趋势
+						href="javascript:void(0);"> <i class="icon-leaf"></i> 销售趋势--折线图
 					</a></li>
 					<li id="menu-chart-alarm"
 						onclick="trans('/line/alarm/4','销售趋势','nav05',this);"><a
-						href="javascript:void(0);"> <i class="icon-leaf"></i> 退货统计
+						href="javascript:void(0);"> <i class="icon-leaf"></i> 销售趋势--柱状图
 					</a></li>
 				</ul></li>
 			

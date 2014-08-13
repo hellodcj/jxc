@@ -16,19 +16,25 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.dcj.basic.model.Pager;
 import com.dcj.jxc.model.Material;
 import com.dcj.jxc.model.User;
-import com.dcj.jxc.service.ISystemService;
+import com.dcj.jxc.service.IMaterialService;
+import com.dcj.jxc.service.IUserService;
 
 
 @Controller
-@RequestMapping("system")
+@RequestMapping("/system")
 public class SystemController {
 	
-	private ISystemService sysService;
+	private IMaterialService matService;
+	private IUserService userService;
 	
 	
 	@Inject
-	public void setSysService(ISystemService sysService) {
-		this.sysService = sysService;
+	public void setMatService(IMaterialService matService) {
+		this.matService = matService;
+	}
+	@Inject
+	public void setUserService(IUserService userService) {
+		this.userService = userService;
 	}
 
 	/**
@@ -40,7 +46,7 @@ public class SystemController {
 	 */
 	@RequestMapping(value="/userList")
 	public String userList(Model model,@RequestParam(value="pageSize",defaultValue="15") int pageSize,@RequestParam(value="pageNo",defaultValue="1") int pageNo){
-		Pager<User> pr = sysService.queryUserList(pageSize, pageNo);
+		Pager<User> pr = userService.queryUserList(pageSize, pageNo);
 		model.addAttribute("pr", pr);
 		return "/system/user_list";
 		
@@ -63,7 +69,7 @@ public class SystemController {
 	 */
 	@RequestMapping(value = "/check_username", produces = "text/html;charset=UTF-8")
 	public @ResponseBody String checkUserNameRepeat(@RequestParam(value="username", defaultValue="") String username) {
-		boolean ret = sysService.checkUserNameRepeat(username);
+		boolean ret = userService.checkUserNameRepeat(username);
 		return String.valueOf(!ret);
 	}
 	
@@ -73,14 +79,15 @@ public class SystemController {
 	 * @param model
 	 * @param user
 	 * @return
+	 * @throws Exception 
 	 */
 	@RequestMapping(value = "/user_saveOrUpdate")
-	public String userSaveOrUpdate(User user) {
+	public String userSaveOrUpdate(User user) throws Exception {
 		Integer id = user.getId();
 		if (id>0) {
-			sysService.updateUser(user);
+			userService.updateUser(user);
 		} else { // save
-			sysService.addUser(user);
+			userService.addUser(user);
 		}
 		return "redirect:userList";
 	}
@@ -94,7 +101,7 @@ public class SystemController {
 	@RequestMapping(value = "/user_edit")
 	public String userEdit(ModelMap model, @RequestParam(value = "id", defaultValue="-1") int userId) {
 		if (userId != -1) {
-			User user = sysService.loadUser(userId); // 根据id查询用户，返回到页面上,dao里面目前还没有根据id查询的方法，先写死
+			User user = userService.loadUser(userId); // 根据id查询用户，返回到页面上,dao里面目前还没有根据id查询的方法，先写死
 			model.put("user", user);
 		}
 		return "/system/user_update";
@@ -106,7 +113,7 @@ public class SystemController {
 	 */
 	@RequestMapping(value="/material_list")
 	public String materialList(ModelMap model,@RequestParam(value="pageSize",defaultValue="15") int pageSize,@RequestParam(value="pageNo",defaultValue="1") int pageNo){
-		Pager<Material> pr = sysService.queryMaterialList(pageSize,pageNo);
+		Pager<Material> pr = matService.queryMaterialList(pageSize,pageNo);
 		model.addAttribute("pr", pr);
 		return "/system/material_list";
 	}
@@ -116,7 +123,7 @@ public class SystemController {
 	 */
 	@RequestMapping(value="/material_create")
 	public String materialAdd(ModelMap model){
-		List<String> categoryList = sysService.queryExistMaterialCategory();
+		List<String> categoryList = matService.queryExistMaterialCategory();
 		model.put("categoryList", categoryList);
 		return "/system/material_create";
 	}
@@ -128,7 +135,7 @@ public class SystemController {
 	@RequestMapping(value="/material_update")
 	public String materialEdit(ModelMap model,@RequestParam(defaultValue="-1",value="materialId") int materialId){
 		if (materialId!= -1){
-			Material material = sysService.loadMaterial(materialId);
+			Material material = matService.loadMaterial(materialId);
 			model.put("material", material);
 		}
 		return "/system/material_update";
@@ -141,9 +148,9 @@ public class SystemController {
 	public String saveOrUpdateMaterial(Material material){
 		Integer materialId = material.getId();
 		if(materialId>0){
-			sysService.updateMaterial(material);
+			matService.updateMaterial(material);
 		}else{
-			sysService.saveMaterial(material);
+			matService.saveMaterial(material);
 		}
 		return "redirect:material_list";
 	}
