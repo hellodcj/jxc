@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -36,7 +38,8 @@ public class PurchaseOrder {
 		this.ordertime = ordertime;
 	}
 	
-	@OneToOne
+	@ManyToOne
+	@JoinColumn(name="vendor_id")
 	public Vendor getVendor() {
 		return vendor;
 	}

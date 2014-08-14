@@ -5,19 +5,12 @@
 	<div class="widget-box">
 		<div class="widget-header header-color-pink">
 			<h5><i class="icon-pencil"></i>添加采购</h5>
-
-			<div class="widget-toolbar no-border">
-				<button id="back" class="btn btn-xs btn-yellow bigger">
-					<i class="icon-arrow-left"></i>
-					返回
-				</button>
-			</div>
 		</div>
 
 		<div class="widget-body">
 			<div class="widget-main">
 				
-				<form class="form-horizontal" id="addUser" action="/system/user_saveOrupdate" method="post" role="form">
+				<form class="form-horizontal" id="addForm" role="form"> 
 	
 					<div class="space-4"></div>
 					
@@ -27,14 +20,18 @@
 					         <div class="form-group">
 					            <label class="col-sm-1"> 供应商: </label>
 								<div class="col-sm-3">
-									<input type="text" name="username" id="username" placeholder="采购名 必填 " class="col-xs-10 col-sm-12" />
+									<select name="vendor_id">
+						         		<c:forEach items="${vl }" var="vendor">
+						         			<option value="${vendor.id}">${vendor.name}</option>
+						         		</c:forEach>
+						         	</select>
 								</div>
 								<label class="col-sm-1"> 进货时间: </label>
 								<div class="col-sm-3">
-									<input name="ordertime" placeholder="选择进货时间" type="text"  id="ordertime" class="ol-xs-10 col-sm-12"  >
+									<input name="orderDate" placeholder="选择进货时间" type="text"  id="orderDate" class="ol-xs-10 col-sm-12"  >
 								</div>
 								<div class="col-sm-1">
-									<button id="query" type="button" class="btn btn-sm btn-grey">
+									<button id="query" type="button" class="btn btn-sm btn-grey" onclick="addDetail();">
 										<i class="glyphicon glyphicon-plus bigger-110"></i> 添加明细
 									</button>
 								</div>
@@ -50,31 +47,29 @@
 						         <th>货物</th>
 						         <th>数量</th>
 						         <th>单价</th>
+						         <th>操作</th>
 						      </tr>
 						   </thead>
-						   <tbody>
-						      <tr>
-						         <td>Tanmay</td>
+						   <tbody id="purchaseBody">
+						      <tr id="cloneTr" style="display:none">
 						         <td>
-						         	<select>
-						         		<option value="11">11</option>
-						         		<option value="11">11</option>
-						         		<option value="11">11</option>
-						         		<option value="11">11</option>
+						         	<select name="m_id">
+						         		<c:forEach items="${ml }" var="mat">
+						         			<option value="${mat.id}">${mat.name}</option>
+						         		</c:forEach>
 						         	</select>
 						         </td>
-						         <td>560001</td>
-						      </tr>
-						      <tr>
-						         <td>Sachin</td>
-						         <td>Mumbai</td>
-						         <td>400003</td>
-						      </tr>
-						      <tr>
-						         <td>Uma</td>
-						         <td>Pune</td>
-						         <td>411027</td>
-						      </tr>
+						         <td>
+						         	<input type="text" name="num" size="8"/>
+						         </td>
+						         <td><input type="text" name="price" size="8"/></td>
+						         <td>
+						         	<button type="button" class="btn  btn-danger btn-sm" onclick="delPurchaseItem(this);">
+											<i class="glyphicon glyphicon-trash"></i>
+											删除
+									</button>
+						         </td>
+						      </tr> 
 						   </tbody>
 						</table>
 					</div>
@@ -107,18 +102,6 @@
 
 <script type="text/javascript">
 	
-
-	$("#save").click(function() {
-		
-		if (!$('#addUser').valid()) {
-			return;
-		}
-		
-		var param = $("#addUser").serialize(); // 获取表单数据
-		var url = "/system/user_saveOrUpdate"; // 入库并跳转到采购列表
-		console.log(param);
-		trans2(url, '系统管理-采购管理', param);
-	});
 	$("#cancel").click(function() {
 		trans2('/system/userList', '系统管理-采购管理', null);
 	});
@@ -126,11 +109,30 @@
 		trans2('/system/userList', '系统管理-采购管理', null);
 	});
 	
-	$("#ordertime").datetimepicker({
+	$("#orderDate").datetimepicker({
 		format: 'yyyy-mm-dd',
 	    autoclose: true,
 	    todayBtn: true,
 	    pickerPosition: "bottom-right"
+	});
+	
+	//添加明细按钮的操作
+	function addDetail(){
+		//克隆新的一行
+		var cloneTr = $("#cloneTr").clone().removeAttr("id").show();
+		$("#purchaseBody").append(cloneTr);
+	}
+	
+	function delPurchaseItem(obj){
+		//将一行删除
+		$(obj).parent().parent().remove();
+	}
+
+	$("#save").click(function() {
+		
+		var param = $("#addForm").find(":not(:hidden)").serialize(); // 获取表单数据
+		var url = "/purchase/adds"; // 入库并跳转到采购列表
+		trans2(url, '系统管理-添加采购', param); 
 	});
 </script>
 

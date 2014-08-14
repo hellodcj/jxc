@@ -3,6 +3,7 @@ package com.dcj.jxc.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -36,7 +37,8 @@ public class PurchaseOrderItem {
 		this.number = number;
 	}
 	
-	@OneToOne
+	@ManyToOne
+	@JoinColumn(name="m_id")
 	public Material getMaterial() {
 		return material;
 	}
@@ -45,6 +47,7 @@ public class PurchaseOrderItem {
 	}
 	
 	@ManyToOne
+	@JoinColumn(name="order_id")
 	public PurchaseOrder getPuerchaseOrder() {
 		return puerchaseOrder;
 	}
