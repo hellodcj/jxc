@@ -91,7 +91,7 @@
 						href="javascript:void(0);"> <i class="icon-leaf"></i> 采购进货
 					</a></li>
 					<li id="menu-sensor-sim"
-						onclick="trans('/param/sen/0','采购管理-采购历史','nav01',this);"><a
+						onclick="trans('/purchase/listByMonth','采购管理-采购历史','nav01',this);"><a
 						href="javascript:void(0);"> <i class="icon-leaf"></i> 采购历史
 					</a></li>
 				</ul></li>

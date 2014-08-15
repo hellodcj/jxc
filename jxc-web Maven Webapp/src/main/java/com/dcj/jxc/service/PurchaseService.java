@@ -1,5 +1,10 @@
 package com.dcj.jxc.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -48,7 +53,15 @@ public class PurchaseService implements IPurchaseService{
 		PurchaseOrder po = new PurchaseOrder();
 		Vendor vendor = vendorDao.load(dto.getVendor_id());
 		
-		po.setOrdertime(dto.getOrderDate());
+		//设置时间
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date date = sdf.parse(dto.getOrderDate());
+			po.setOrdertime(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
 		po.setVendor(vendor);
 		
 		purchaseOrderDao.add(po);
@@ -64,6 +77,21 @@ public class PurchaseService implements IPurchaseService{
 			purchaseOrderItemDao.add(poi);
 		}
 		
+	}
+
+	@Override
+	public List<PurchaseOrder> listByMonth(String month) {
+		// TODO Auto-generated method stub
+		
+		//先做一个实验
+		month = "2014-07";
+		String start = "2014-07";
+		String end = "2014-08";
+		String hql = "from PurchaseOrder po where DATE_FORMAT(po.ordertime,'%Y-%m') = ? order by po.ordertime desc ";
+		String hql2 = "from PurchaseOrder po where DATE_FORMAT(po.ordertime,'%Y-%m') between ? and ? order by po.ordertime desc";
+		List<PurchaseOrder> lp =purchaseOrderDao.list(hql2,new Object[]{start,end});
+	//System.out.println(lp.get(1).getItems());
+		return lp;
 	}
 
 }

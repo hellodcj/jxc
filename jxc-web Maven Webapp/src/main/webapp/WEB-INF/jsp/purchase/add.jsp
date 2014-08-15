@@ -27,8 +27,8 @@
 						         	</select>
 								</div>
 								<label class="col-sm-1"> 进货时间: </label>
-								<div class="col-sm-3">
-									<input name="orderDate" placeholder="选择进货时间" type="text"  id="orderDate" class="ol-xs-10 col-sm-12"  >
+								<div class="col-sm-4">
+									<input name="orderDate" placeholder="选择进货时间" type="text"  id="orderDate" class="ol-xs-10 col-sm-12" readonly="readonly" > 
 								</div>
 								<div class="col-sm-1">
 									<button id="query" type="button" class="btn btn-sm btn-grey" onclick="addDetail();">
@@ -109,11 +109,18 @@
 		trans2('/system/userList', '系统管理-采购管理', null);
 	});
 	
-	$("#orderDate").datetimepicker({
+	/* $("#orderDate").datetimepicker({
 		format: 'yyyy-mm-dd',
 	    autoclose: true,
 	    todayBtn: true,
 	    pickerPosition: "bottom-right"
+	}); */
+	
+	$("#orderDate").datetimepicker({
+		format: 'yyyy-mm-dd',
+		startView : 3,
+		minView : 2,
+	    autoclose: true
 	});
 	
 	//添加明细按钮的操作
@@ -131,7 +138,7 @@
 	$("#save").click(function() {
 		
 		var param = $("#addForm").find(":not(:hidden)").serialize(); // 获取表单数据
-		var url = "/purchase/adds"; // 入库并跳转到采购列表
+		var url = "/purchase/add"; // 入库并跳转到采购列表
 		trans2(url, '系统管理-添加采购', param); 
 	});
 </script>

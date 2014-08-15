@@ -410,8 +410,7 @@
 		$('body').delegate(".date-picker", "click", function(event) {
 			$('.date-picker').datepicker({
 				startView : 3,
-				minView : 0,
-				minuteStep:60,
+				minView : 2,
 				//viewSelect :"day",
 				autoclose : true
 			}).next().on(ace.click_event, function() {

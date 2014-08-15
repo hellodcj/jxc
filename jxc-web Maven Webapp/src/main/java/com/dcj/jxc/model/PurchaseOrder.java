@@ -47,7 +47,7 @@ public class PurchaseOrder {
 		this.vendor = vendor;
 	}
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "puerchaseOrder")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "puerchaseOrder")
 	public Set<PurchaseOrderItem> getItems() {
 		return items;
 	}
