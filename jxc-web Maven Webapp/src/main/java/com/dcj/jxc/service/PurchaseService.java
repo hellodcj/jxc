@@ -75,6 +75,10 @@ public class PurchaseService implements IPurchaseService{
 			poi.setPuerchaseOrder(po);
 			poi.setPrice(dto.getPrice()[i]);
 			purchaseOrderItemDao.add(poi);
+			
+			//3.更新物料的库存数量
+			m.setStorageNum(m.getStorageNum()+dto.getNum()[i]);
+			materialDao.update(m);
 		}
 		
 	}

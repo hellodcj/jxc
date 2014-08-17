@@ -129,11 +129,11 @@
 			</a>
 				<ul class="submenu">
 					<li id="menu-query-alarm"
-						onclick="trans('/query/alarm','销售趋势','nav05',this);"><a
+						onclick="trans('/sale/linegragh','销售趋势','nav05',this);"><a
 						href="javascript:void(0);"> <i class="icon-leaf"></i> 销售趋势--折线图
 					</a></li>
 					<li id="menu-chart-alarm"
-						onclick="trans('/line/alarm/4','销售趋势','nav05',this);"><a
+						onclick="trans('/sale/columngragh','销售趋势','nav05',this);"><a
 						href="javascript:void(0);"> <i class="icon-leaf"></i> 销售趋势--柱状图
 					</a></li>
 				</ul></li>
@@ -143,12 +143,7 @@
 					class="menu-text"> 报表打印 </span> <b class="arrow icon-angle-down"></b>
 			</a>
 				<ul class="submenu">
-					<li id="menu-report-alarm"
-						onclick="trans('/report/analog','报表-销售日报表','nav07',this);">
-						<a href="javascript:void(0);"> <i class="icon-leaf"></i>
-							销售日报表
-					</a>
-					</li>
+					
 					<li id="menu-report-swi"
 						onclick="trans('/report/switch','报表-销售月报表','nav07',this);">
 						<a href="javascript:void(0);"> <i class="icon-leaf"></i>

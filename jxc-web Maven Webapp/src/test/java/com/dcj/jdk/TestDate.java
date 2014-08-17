@@ -1,6 +1,7 @@
 package com.dcj.jdk;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -39,6 +40,17 @@ public class TestDate {
         
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         System.out.println(sdf.format(new Date()));
+	}
+	
+	@Test
+	public void test2(){
+		for (int i=1;i<=30;i++){
+			Calendar calendar=new GregorianCalendar(); 
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			calendar.add(Calendar.DATE,i-30);
+			System.out.println(i+"=="+sdf.format(calendar.getTime()));
+		}
+		
 	}
 
 }
