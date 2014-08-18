@@ -4,7 +4,6 @@ package com.dcj.jxc.controller;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +13,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dcj.basic.model.Pager;
+import com.dcj.jxc.model.Custom;
 import com.dcj.jxc.model.Material;
 import com.dcj.jxc.model.User;
+import com.dcj.jxc.model.Vendor;
+import com.dcj.jxc.service.ICustomService;
 import com.dcj.jxc.service.IMaterialService;
 import com.dcj.jxc.service.IUserService;
+import com.dcj.jxc.service.IVendorService;
 
 
 @Controller
@@ -26,7 +29,8 @@ public class SystemController {
 	
 	private IMaterialService matService;
 	private IUserService userService;
-	
+	private IVendorService vendorService;
+	private ICustomService customService;
 	
 	@Inject
 	public void setMatService(IMaterialService matService) {
@@ -36,7 +40,14 @@ public class SystemController {
 	public void setUserService(IUserService userService) {
 		this.userService = userService;
 	}
-
+	@Inject
+	public void setVendorService(IVendorService vendorService) {
+		this.vendorService = vendorService;
+	}
+	@Inject
+	public void setCustomService(ICustomService customService) {
+		this.customService = customService;
+	}
 	/**
 	 * 用户列表
 	 * @param model
@@ -108,6 +119,7 @@ public class SystemController {
 	}
 	
 	
+	
 	/**
 	 * 物料列表
 	 */
@@ -131,7 +143,6 @@ public class SystemController {
 	/**
 	 * 编辑物料的跳转
 	 */
-	//TODO 试一下requestParam
 	@RequestMapping(value="/material_update")
 	public String materialEdit(ModelMap model,@RequestParam(defaultValue="-1",value="materialId") int materialId){
 		if (materialId!= -1){
@@ -153,5 +164,90 @@ public class SystemController {
 			matService.saveMaterial(material);
 		}
 		return "redirect:material_list";
+	}
+	
+	
+	/**
+	 * 供应商列表
+	 */
+	@RequestMapping(value="/vendor_list")
+	public String vendorList(ModelMap model,@RequestParam(value="pageSize",defaultValue="15") int pageSize,@RequestParam(value="pageNo",defaultValue="1") int pageNo){
+		Pager<Vendor> pr = vendorService.queryVendorList(pageSize,pageNo);
+		model.addAttribute("pr", pr);
+		return "/system/vendor_list";
+	}
+	
+	/**
+	 * 添加供应商的跳转
+	 */
+	@RequestMapping(value="/vendor_create")
+	public String vendorAdd(){
+		return "/system/vendor_create";
+	}
+	
+	/**
+	 * 编辑供应商的跳转
+	 */
+	@RequestMapping(value="/vendor_update")
+	public String vendorEdit(ModelMap model,int vendorId){
+		Vendor vendor = vendorService.loadVendor(vendorId);
+		model.put("vendor", vendor);
+		return "/system/vendor_update";
+	}
+	
+	/**
+	 * 添加或者更新供应商信息
+	 */
+	@RequestMapping(value="/vendor_saveOrUpdate")
+	public String saveOrUpdateVendor(Vendor vendor){
+		Integer vendorId = vendor.getId();
+		if(vendorId>0){
+			vendorService.updateVendor(vendor);
+		}else{
+			vendorService.saveVendor(vendor);
+		}
+		return "redirect:vendor_list";
+	}
+	
+	/**
+	 * 客户列表
+	 */
+	@RequestMapping(value="/custom_list")
+	public String customList(ModelMap model,@RequestParam(value="pageSize",defaultValue="15") int pageSize,@RequestParam(value="pageNo",defaultValue="1") int pageNo){
+		Pager<Custom> pr = customService.queryCustomList(pageSize,pageNo);
+		model.addAttribute("pr", pr);
+		return "/system/custom_list";
+	}
+	
+	/**
+	 * 添加客户的跳转
+	 */
+	@RequestMapping(value="/custom_create")
+	public String customAdd(){
+		return "/system/custom_create";
+	}
+	
+	/**
+	 * 编辑客户的跳转
+	 */
+	@RequestMapping(value="/custom_update")
+	public String customEdit(ModelMap model,int customId){
+		Custom custom = customService.loadCustom(customId);
+		model.put("custom", custom);
+		return "/system/custom_update";
+	}
+	
+	/**
+	 * 添加或者更新客户信息
+	 */
+	@RequestMapping(value="/custom_saveOrUpdate")
+	public String saveOrUpdatecustom(Custom custom){
+		Integer customId = custom.getId();
+		if(customId>0){
+			customService.updateCustom(custom);
+		}else{
+			customService.saveCustom(custom);
+		}
+		return "redirect:custom_list";
 	}
 }

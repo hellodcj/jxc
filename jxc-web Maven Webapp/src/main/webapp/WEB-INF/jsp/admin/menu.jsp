@@ -67,11 +67,11 @@
 					</a>
 					</li>
 					<li id="menu-sensor-type"
-						onclick="trans('/system/vendorList','系统管理-供应商管理','nav000',this);"><a
+						onclick="trans('/system/vendor_list','系统管理-供应商管理','nav000',this);"><a
 						href="javascript:void(0);"> <i class="icon-leaf"></i> 供应商管理
 					</a></li>
 					<li id="menu-system-param"
-						onclick="trans('/system/customList','系统管理-客户管理','nav000',this);">
+						onclick="trans('/system/custom_list','系统管理-客户管理','nav000',this);">
 						<a href="javascript:void(0);"> <i class="icon-leaf"></i>
 							客户管理
 					</a>
@@ -102,12 +102,12 @@
 			</a>
 				<ul class="submenu">
 					<li id="menu-map-item"
-						onclick="trans('/maps/show_map_notedit','销售管理-销售出货','nav02',this);">
+						onclick="trans('/sale/add','销售管理-销售出货','nav02',this);">
 						<a href="javascript:void(0);"> <i class="icon-leaf"></i> 销售出货
 					</a>
 					</li>
 					<li id="menu-check-state"
-						onclick="trans('/monitor/state','销售管理-销售历史','nav02',this);">
+						onclick="trans('/sale/listByMonth','销售管理-销售历史','nav02',this);">
 						<a href="javascript:void(0);"> <i class="icon-leaf"></i> 销售历史
 					</a>
 					</li>

@@ -56,7 +56,7 @@ $('.date-picker-month').datepicker({format: 'yyyy-mm',viewMode:2,minViewMode:1,a
 
 function listByMonth(){
 	var url = "/purchase/listByMonth";
-	var month = $('#slt-date-month').val(); // 入库并跳转到采购列表
+	var month = $('slt-date-month').val(); // 入库并跳转到采购列表
 	trans2(url, '系统管理-添加采购', 'month='+month); 
 }
 </script>

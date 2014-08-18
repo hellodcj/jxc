@@ -85,16 +85,9 @@ public class PurchaseService implements IPurchaseService{
 
 	@Override
 	public List<PurchaseOrder> listByMonth(String month) {
-		// TODO Auto-generated method stub
-		
-		//先做一个实验
-		month = "2014-07";
-		String start = "2014-07";
-		String end = "2014-08";
 		String hql = "from PurchaseOrder po where DATE_FORMAT(po.ordertime,'%Y-%m') = ? order by po.ordertime desc ";
 		String hql2 = "from PurchaseOrder po where DATE_FORMAT(po.ordertime,'%Y-%m') between ? and ? order by po.ordertime desc";
-		List<PurchaseOrder> lp =purchaseOrderDao.list(hql2,new Object[]{start,end});
-	//System.out.println(lp.get(1).getItems());
+		List<PurchaseOrder> lp =purchaseOrderDao.list(hql,month);
 		return lp;
 	}
 
