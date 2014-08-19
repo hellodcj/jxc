@@ -11,4 +11,6 @@ public interface ISaleService {
 
 	List<SaleOrder> listByMonth(String month);
 
+	List<SaleOrder> loadSaleOrderByTime(String time);
+
 }

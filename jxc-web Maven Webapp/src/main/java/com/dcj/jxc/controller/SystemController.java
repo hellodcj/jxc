@@ -118,8 +118,15 @@ public class SystemController {
 		return "/system/user_update";
 	}
 	
-	
-	
+	/**
+	 * 物料库存的跳转
+	 */
+	@RequestMapping(value="/storage_list")
+	public String storageList(ModelMap model,@RequestParam(value="pageSize",defaultValue="15") int pageSize,@RequestParam(value="pageNo",defaultValue="1") int pageNo){
+		Pager<Material> pr = matService.queryMaterialList(pageSize,pageNo);
+		model.addAttribute("pr", pr);
+		return "/system/storage_list";
+	}
 	/**
 	 * 物料列表
 	 */

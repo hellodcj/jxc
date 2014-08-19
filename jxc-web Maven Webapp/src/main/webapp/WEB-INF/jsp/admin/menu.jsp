@@ -56,12 +56,6 @@
 				<ul class="submenu">
 
 					<li id="menu-system-param"
-						onclick="trans('/basic/cm_config','系统管理-基本信息参数','nav000',this);">
-						<a href="javascript:void(0);"> <i class="icon-leaf"></i>
-							基本信息配置
-					</a>
-					</li>
-					<li id="menu-system-param"
 						onclick="trans('/system/material_list','系统管理-物料管理','nav000',this);">
 						<a href="javascript:void(0);"> <i class="icon-leaf"></i>物料管理
 					</a>
@@ -114,10 +108,9 @@
 
 				</ul></li>
 
-			<li id="nav06"><a href="javascript:void(0);"
-				class="dropdown-toggle" onclick="m_video.showVideo();"> <i
+			<li id="nav06"><a href="javascript:void(0);" onclick="trans('/system/storage_list','系统管理-库存管理','nav000',this);"> <i
 					class=" icon-facetime-video"></i> <span class="menu-text">
-						库存管理 </span> <b class="arrow icon-angle-down"></b>
+						库存管理 </span> 
 			</a>
 				<ul class="submenu">
 				</ul></li>

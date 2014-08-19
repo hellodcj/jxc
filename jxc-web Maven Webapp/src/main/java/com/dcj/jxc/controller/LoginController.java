@@ -42,13 +42,18 @@ public class LoginController {
 		User u = userService.loadUser(username,password);
 		//2.如果有用户信息，跳转到首页，将用户信息存入session
 		if (u!=null){
+			session.setAttribute("user", u);
 			return "/admin/index";
 		}
 		//3.没有用户信息，跳转到登陆页面
 		model.addAttribute("error", "用户名密码错误！");
-		session.setAttribute("user", u);
 		return "/admin/login";
 	}
 	
-	
+	@RequestMapping(value="/logout",method=RequestMethod.GET)
+	public String logout(HttpSession session) {
+		session.removeAttribute("user");
+		session.invalidate();
+		return "/admin/login";
+	}
 }

@@ -21,7 +21,7 @@
     <div class="container">
 
       <form class="form-signin" role="form" action="login" method="post" id="loginform">
-        <h2 class="form-signin-heading">Please login</h2>
+        <h4 class="form-signin-heading">铁燕公司进销存管理系统--登陆界面</h4>
         <input class="form-control" placeholder="Username" required="" autofocus="" name="username">
         <input type="password" class="form-control" placeholder="Password" required="" name="password">
         <div class="checkbox">

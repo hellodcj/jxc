@@ -203,7 +203,7 @@
 				<a href="javascript:void(0);" class="navbar-brand"
 					style="cursor: default"> <small> <img
 						src="${root }/resources/avatars/logo.png" height="25">
-						KJ758型重大危险源安全监控预警系统- <span id="navbar-container-title">${config.factoryname }</span>
+						铁燕公司进销存管理系统 <span id="navbar-container-title">${config.factoryname }</span>
 				</small>
 				</a>
 				<!-- /.brand -->
@@ -217,16 +217,20 @@
 							class="nav-user-photo"
 							src="${root}/resources/avatars/avatar2.png" alt="Jason's Photo" /><span
 							class="user-info"><small>欢迎您,</small>
-								${sessionScope['ABKJ-PT-ACCOUNT'].name} </span><i
+								${sessionScope.user.username} </span><i
 							class="icon-caret-down"></i> </a>
 						<ul
 							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-							<li><a href="javascript:headChangePwdShow();"><i
+							<!-- 
+								<li><a href="javascript:headChangePwdShow();"><i
 									class="icon-cog"></i> 修改密码 </a></li>
-							<li class="divider"></li>
+								<li class="divider"></li>
+							 -->
 							<li><a href="${root}/logout"><i class="icon-off"></i> 离开
 							</a></li>
-						</ul></li>
+						</ul> 
+						
+						</li>
 				</ul>
 			</div>
 			<!-- /.navbar-header -->

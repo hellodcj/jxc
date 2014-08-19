@@ -7,6 +7,7 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -19,6 +20,7 @@ import com.dcj.dto.SaleDto;
 import com.dcj.jxc.model.Custom;
 import com.dcj.jxc.model.Material;
 import com.dcj.jxc.model.SaleOrder;
+import com.dcj.jxc.model.SaleOrderItem;
 import com.dcj.jxc.service.ICustomService;
 import com.dcj.jxc.service.IMaterialService;
 import com.dcj.jxc.service.ISaleService;
@@ -49,24 +51,35 @@ public class SaleController {
 	@RequestMapping(value="/linegragh",method=RequestMethod.GET)
 	public String lineGraghPage(ModelMap model){
 		//1.获得近三十天的日期数据，作为x轴的数据
+		//2.暂时伪造一些销售额的数据，作为y轴的数据
 		List<String> xAxis = new ArrayList<String>();
+		List<Float> yAxis = new ArrayList<Float>();
 		for (int i=1;i<=30;i++){
 			Calendar calendar=new GregorianCalendar(); 
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			calendar.add(Calendar.DATE,i-30);
 			//System.out.println(i+"=="+sdf.format(calendar.getTime()));
-			xAxis.add(sdf.format(calendar.getTime()));
+			String time = sdf.format(calendar.getTime());
+			List<SaleOrder> ls = saleService.loadSaleOrderByTime(time);
+			float saleMoney = 0;
+			for (SaleOrder so :ls){
+				Set<SaleOrderItem> soiSet = so.getItems();
+				for (SaleOrderItem soi:soiSet)
+					saleMoney+=soi.getPrice();
+			}
+			xAxis.add(time);
+			yAxis.add(saleMoney);
 		}
-		//2.暂时伪造一些销售额的数据，作为y轴的数据
-		List<Float> yAxis = new ArrayList<Float>();
-		for (float i=1.4f;i<=31;i++){
-			yAxis.add(i);
-		}
+		
+//		for (float i=1.4f;i<=31;i++){
+//			yAxis.add(i);
+//		}
+		
+		
 		//3.将数据放入modelmap中
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("xAxis", xAxis);
 		map.put("yAxis", yAxis);
-		//String graghData = JsonUtils.writeObjToString(map);
 		model.addAttribute("graghData",map);
 		return "/sale/linegragh";
 	}
@@ -113,6 +126,6 @@ public class SaleController {
 	public String listByMonth(String month,ModelMap model){
 		List<SaleOrder> pol = saleService.listByMonth(month);
 		model.addAttribute("pol", pol);
-		return "/purchase/list";
+		return "/sale/list";
 	}
 }
