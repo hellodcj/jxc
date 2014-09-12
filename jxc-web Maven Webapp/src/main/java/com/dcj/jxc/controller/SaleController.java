@@ -85,6 +85,69 @@ public class SaleController {
 	}
 	
 	/**
+	 * 销售曲线，柱状图的跳转
+	 */
+	@RequestMapping(value="/columngragh",method=RequestMethod.GET)
+	public String columngragh(ModelMap model){
+		float yesterdaySale= 0;
+		float lastWeekSale= 0;
+		float lastMonthSale= 0;
+		float saleMoney = 0;
+		//获取30日内的日均销售
+		for (int i=1;i<=30;i++){
+			Calendar calendar=new GregorianCalendar(); 
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			calendar.add(Calendar.DATE,i-30);
+			String time = sdf.format(calendar.getTime());
+			List<SaleOrder> ls = saleService.loadSaleOrderByTime(time);
+			for (SaleOrder so :ls){
+				Set<SaleOrderItem> soiSet = so.getItems();
+				for (SaleOrderItem soi:soiSet)
+					saleMoney+=soi.getPrice();
+			}
+		}
+		lastMonthSale = saleMoney/30;
+		saleMoney = 0;
+		
+		//获取7日内的日均销售
+		for (int i=1;i<=7;i++){
+			Calendar calendar=new GregorianCalendar(); 
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			calendar.add(Calendar.DATE,i-7);
+			String time = sdf.format(calendar.getTime());
+			List<SaleOrder> ls = saleService.loadSaleOrderByTime(time);
+			for (SaleOrder so :ls){
+				Set<SaleOrderItem> soiSet = so.getItems();
+				for (SaleOrderItem soi:soiSet)
+					saleMoney+=soi.getPrice();
+			}
+		}
+		lastWeekSale = saleMoney/7;
+		saleMoney = 0;
+		
+		//获取昨日的日均销售
+		Calendar calendar=new GregorianCalendar(); 
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		calendar.add(Calendar.DATE,-1);
+		String time = sdf.format(calendar.getTime());
+		List<SaleOrder> ls = saleService.loadSaleOrderByTime(time);
+		for (SaleOrder so :ls){
+			Set<SaleOrderItem> soiSet = so.getItems();
+			for (SaleOrderItem soi:soiSet)
+				saleMoney+=soi.getPrice();
+		}
+		yesterdaySale = saleMoney;
+		
+		//3.将数据放入modelmap中
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("yesterdaySale", yesterdaySale);
+		map.put("lastWeekSale", lastWeekSale);
+		map.put("lastMonthSale", lastMonthSale);
+		model.addAttribute("graghData",map);
+		return "/sale/columngragh";
+	}
+	
+	/**
 	 * 添加销售单的跳转
 	 * @return
 	 */
