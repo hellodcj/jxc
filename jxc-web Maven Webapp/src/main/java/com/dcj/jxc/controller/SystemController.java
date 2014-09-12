@@ -1,18 +1,26 @@
 package com.dcj.jxc.controller;
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.dcj.basic.model.Pager;
+import com.dcj.dto.ViewExcel;
 import com.dcj.jxc.model.Custom;
 import com.dcj.jxc.model.Material;
 import com.dcj.jxc.model.User;
@@ -127,6 +135,22 @@ public class SystemController {
 		model.addAttribute("pr", pr);
 		return "/system/storage_list";
 	}
+	
+	/**
+	 * 库存的excel导出
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(params="method=exceltest",method=RequestMethod.GET)
+	public ModelAndView viewExcel(HttpServletRequest request, HttpServletResponse response){
+		List<Material> list = matService.listMaterial();
+	    Map model = new HashMap();   
+	    model.put("list", list);   
+	    ViewExcel viewExcel = new ViewExcel();   
+	    return new ModelAndView(viewExcel, model); 
+	}
+	
 	/**
 	 * 物料列表
 	 */

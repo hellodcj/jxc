@@ -18,9 +18,6 @@ $(function () {
 	var x = "${graghData.yesterdaySale}";
 	var y = "${graghData.lastWeekSale}";
 	var z = "${graghData.lastMonthSale}";
-	//x=x.split(",");
-	//y=y.split(",");
-	//z=z.split(",");
 	var xArray=new Array();
 	var yArray=new Array();
 	var zArray=new Array();

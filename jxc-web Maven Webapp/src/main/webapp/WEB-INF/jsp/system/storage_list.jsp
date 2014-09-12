@@ -4,6 +4,11 @@
 <div class="widget-box">
 	<div class="widget-header header-color-pink">
 		<h5><i class="icon-table"></i>库存列表</h5>
+		<div class="widget-toolbar no-border">
+			<button id="export" class="btn btn-xs bigger btn-yellow dropdown-toggle" onclick="javascript:window.open('/system?method=exceltest');">
+				<i class="icon-save"> excel导出</i>
+			</button>
+		</div>
 	</div>
 	<div class="widget-body">
 		<div class="widget-main no-padding">

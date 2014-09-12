@@ -63,4 +63,5 @@ public class MaterialService implements IMaterialService {
 		List<Material> lm = materialDao.list("from Material");
 		return lm;
 	}
+
 }

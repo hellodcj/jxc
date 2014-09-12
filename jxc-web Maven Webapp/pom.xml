@@ -155,6 +155,11 @@
 		    <artifactId>jackson-mapper-asl</artifactId>
 		    <version>1.9.13</version>
 		</dependency>
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi</artifactId>
+		    <version>3.11-beta2</version>
+		</dependency>
   </dependencies>
   <build>
 		<finalName>jxc-web</finalName>

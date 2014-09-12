@@ -17,4 +17,5 @@ public interface IMaterialService {
 	List<String> queryExistMaterialCategory();
 
 	List<Material> listMaterial();
+
 }
